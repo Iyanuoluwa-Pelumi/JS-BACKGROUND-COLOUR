@@ -31,6 +31,11 @@ colorCode.textContent = '';
 colorCode.style.fontSize = '1.5rem';
 colorCode.style.textAlign = 'center';
 
+//Copy Div
+let copyDiv = document.createElement('div');
+//copyDiv.style.position = 'relative';
+//copyDiv.style.display = 'flex';
+
 //Copy Img
 let copyImg = document.createElement('img')
 copyImg.alt = 'Copy Code';
@@ -43,6 +48,11 @@ copyImg.style.cursor = 'pointer'
 let copyText = document.createElement('p');
 copyText.textContent = 'Copied'
 copyText.style.display = 'none'
+copyText.style.backgroundColor = 'black'
+copyText.style.color = 'white'
+copyText.style.padding = '5px'
+copyText.style.borderRadius = '5px'
+
 
 
 //General Div
@@ -56,6 +66,7 @@ generalDiv.style.gap = '5rem'
 //Color Code & Copy Div
 let contentDiv = document.createElement('div');
 contentDiv.style.display = 'flex';
+//contentDiv.style.flexDirection = 'column'
 contentDiv.style.gap = '2rem';
 contentDiv.style.alignItems = 'center'
 
@@ -119,6 +130,10 @@ generalDiv.appendChild(btnDiv)
 generalDiv.appendChild(heading)
 generalDiv.appendChild(copyImg)
 
+//Apending CopyImg & CopyText in a Div
+copyDiv.appendChild(copyImg);
+copyDiv.appendChild(copyText);
+
 //Appending Code& Copy into a Div
 contentDiv.appendChild(colorCode)
 contentDiv.appendChild(copyImg)
@@ -132,6 +147,7 @@ btnDiv.appendChild(resetBtn);
 //Appending the Div to the HTML Body
 document.body.appendChild(generalDiv)
 document.body.appendChild(contentDiv)
+document.body.appendChild(copyDiv)
 document.body.appendChild(btnDiv)
 
 
@@ -145,7 +161,7 @@ let randomRgb = function () {
 colorBtn.addEventListener('click', () => {
     let randomColor = randomRgb();
     colorCode.textContent = `${randomColor}`;
-    copyImg.src = './content_copy_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png';
+    copyImg.src = './content_copy_24dp_E3_FILL0_wght400_GRAD0_opsz24.png';
     copyImg.style.display = 'block';
     document.body.style.backgroundColor = randomColor;
 })
@@ -158,7 +174,7 @@ autoChange.addEventListener('click', () => {
         intervalId = setInterval(()=> { 
             let randomColor = randomRgb();
             colorCode.textContent = `${randomColor}`
-            copyImg.src = './content_copy_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png';
+            copyImg.src = './content_copy_24dp_E3_FILL0_wght400_GRAD0_opsz24.png';
             copyImg.style.display = 'block';
             document.body.style.backgroundColor = randomColor;
         }, 2000);
@@ -180,11 +196,26 @@ resetBtn.addEventListener('click', () => {
 
 //Copy Img Functionality
 copyImg.addEventListener('click', () => {
-    let copyCode = colorCode.textContent; //targets the text in the colorCode P tag
-    navigator.clipboard.writeText(copyCode); //API to copy text
-    copyText.style.display = 'block'
+    //let copyCode = colorCode.textContent; //targets the text in the colorCode P tag
+    navigator.clipboard.writeText(colorCode.textContent); //API to copy text
+    //copyText.style.display = 'block'
 
-    setTimeout(() => {
+   /* setTimeout(() => {
        copyText.style.display = 'none' 
-    }, 1000 ) //Hides the copied color after 1sec.
-})
+    }, 1000) //Hides the copied color after 1sec.*/
+    
+    //copyImg.outerHTML = `${'copied'}`
+    if (copyImg) {
+        copyImg.style.display = 'none'
+        copyText.style.display = 'block'
+    } setTimeout(() => {
+        copyText.style.display = 'none'
+        copyImg.style.display = 'block'
+    }, 1000)
+
+        /*setTimeout(
+            () => {
+                clearTimeout()
+            }
+        )*/
+    })
