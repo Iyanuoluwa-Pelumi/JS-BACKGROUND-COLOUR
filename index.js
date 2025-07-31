@@ -191,6 +191,7 @@ autoChange.addEventListener('click', () => {
 
 resetBtn.addEventListener('click', () => {
     colorCode.textContent = '';
+    copyImg.style.display = 'none';
     document.body.style.backgroundColor = 'white';
 })
 
