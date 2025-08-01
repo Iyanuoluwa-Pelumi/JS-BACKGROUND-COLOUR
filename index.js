@@ -9,8 +9,10 @@ universalStyle.forEach(element => {
 //Body Styling
 let generalStyle = document.querySelector('body');
 generalStyle.style.fontSize = '16px';
-generalStyle.style.fontFamily = 'sans-serif';
+generalStyle.style.fontFamily = 'Arial, Helvetica, sans-serif;';
 generalStyle.style.backgroundColor = 'white';
+generalStyle.style.width = '90%';
+generalStyle.style.margin = '0 auto';
 document.body.style.display = 'flex';
 document.body.style.flexDirection = 'column'
 document.body.style.justifyContent = 'center';
@@ -61,13 +63,14 @@ generalDiv.style.display = 'flex';
 generalDiv.style.flexDirection = 'column';
 generalDiv.style.alignItems = 'center';
 generalDiv.style.justifyContent = 'center'
-generalDiv.style.gap = '5rem'
+//generalDiv.style.gap = '5rem'
 
 //Color Code & Copy Div
 let contentDiv = document.createElement('div');
 contentDiv.style.display = 'flex';
+contentDiv.classList.add ('content-div')
 //contentDiv.style.flexDirection = 'column'
-contentDiv.style.gap = '2rem';
+//contentDiv.style.gap = '2rem';
 contentDiv.style.alignItems = 'center'
 
 // Button Div
@@ -81,10 +84,10 @@ btnDiv.style.gap = '1rem';
 
 //Change Btn
 let colorBtn = document.createElement('button');
-colorBtn.textContent = 'Change Colour'
+colorBtn.textContent = 'Flip Colour'
 colorBtn.classList.add('btn-color');
 colorBtn.style.backgroundColor = ' #28a745';
-colorBtn.style.padding = '1rem 0.5rem';
+colorBtn.style.padding = '1rem';
 colorBtn.style.fontWeight = 'bold';
 colorBtn.style.color = 'white';
 colorBtn.style.cursor = 'pointer';
@@ -94,27 +97,46 @@ colorBtn.style.fontSize = '1rem';
 
 //Auto Btn
 let autoChange = document.createElement('button');
-autoChange.textContent = 'Auto Change';
-autoChange.classList.add('reset-btn');
+autoChange.textContent = 'Auto Flip';
+autoChange.classList.add('auto-btn');
 autoChange.style.backgroundColor = '#222222';
 autoChange.style.fontWeight = 'bold';
 autoChange.style.color = 'white';
 autoChange.style.borderRadius = '5px';
 autoChange.style.cursor = 'pointer';
-autoChange.style.padding = '1rem 0.5rem';
+autoChange.style.padding = '1rem';
 autoChange.style.fontSize = '1rem';
 
 //Reset Btn
 let resetBtn = document.createElement('button');
-resetBtn.textContent = 'Reset Colour';
+resetBtn.textContent = 'Default Mode';
 resetBtn.classList.add('reset-btn');
 resetBtn.style.backgroundColor = '#007bff';
 resetBtn.style.fontWeight = 'bold';
 resetBtn.style.color = 'white';
 resetBtn.style.borderRadius = '5px';
 resetBtn.style.cursor = 'pointer';
-resetBtn.style.padding = '1rem 0.5rem';
+resetBtn.style.padding = '1rem';
 resetBtn.style.fontSize = '1rem';
+
+
+//Footer
+let footer = document.createElement('footer');
+footer.classList.add('footer');
+footer.style.width = '100%'
+footer.style.left = '0'
+footer.style.bottom = '0'
+footer.style.zIndex = '1000'
+footer.style.position = 'fixed'
+footer.style.padding = '20px 0'
+footer.style.backgroundColor = 'white'
+footer.style.boxShadow = '0 -2px 4px  rgba(0, 0, 0.1)';
+//footer.style.marginTop = '50px'
+footer.textContent = '© 2025 Iyanuoluwa Pelumi. All Rights Reserved.'
+footer.style.textAlign = 'center'
+footer.style.color = '#222222'
+footer.style.fontSize = 'small'
+footer.style.fontWeight = 'bold'
 
 //Appending it to the HTML Body
 document.body.appendChild(colorBtn);
@@ -124,11 +146,13 @@ document.body.appendChild(heading);
 document.body.appendChild(colorCode);
 document.body.appendChild(copyImg)
 document.body.appendChild(copyText)
+document.body.appendChild(footer)
 
 //Appending into General Div
 generalDiv.appendChild(btnDiv)
 generalDiv.appendChild(heading)
 generalDiv.appendChild(copyImg)
+generalDiv.appendChild(footer)
 
 //Apending CopyImg & CopyText in a Div
 copyDiv.appendChild(copyImg);
@@ -149,6 +173,7 @@ document.body.appendChild(generalDiv)
 document.body.appendChild(contentDiv)
 document.body.appendChild(copyDiv)
 document.body.appendChild(btnDiv)
+document.body.appendChild(footer)
 
 
 let randomRgb = function () {
@@ -163,6 +188,8 @@ colorBtn.addEventListener('click', () => {
     colorCode.textContent = `${randomColor}`;
     copyImg.src = './content_copy_24dp_E3_FILL0_wght400_GRAD0_opsz24.png';
     copyImg.style.display = 'block';
+    footer.style.backgroundColor = randomColor;
+    heading.textContent = 'Background Flipped'
     document.body.style.backgroundColor = randomColor;
 })
 
@@ -176,15 +203,18 @@ autoChange.addEventListener('click', () => {
             colorCode.textContent = `${randomColor}`
             copyImg.src = './content_copy_24dp_E3_FILL0_wght400_GRAD0_opsz24.png';
             copyImg.style.display = 'block';
+            footer.style.backgroundColor = randomColor;
             document.body.style.backgroundColor = randomColor;
         }, 2000);
         autoChanging = true;
         autoChange.innerHTML = 'Stop Auto';
+        heading.textContent = 'Background Flipping';
 
     } else {
         clearInterval(intervalId);
         autoChanging = false;
-        autoChange.innerHTML = 'Auto Change';
+        autoChange.innerHTML = 'Auto Flip';
+        heading.textContent = 'Background Colour';
     }
 
 }) 
@@ -192,6 +222,8 @@ autoChange.addEventListener('click', () => {
 resetBtn.addEventListener('click', () => {
     colorCode.textContent = '';
     copyImg.style.display = 'none';
+    heading.textContent = 'Background Colour'
+    footer.style.backgroundColor = 'white';
     document.body.style.backgroundColor = 'white';
 })
 
