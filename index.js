@@ -70,7 +70,7 @@ let contentDiv = document.createElement('div');
 contentDiv.style.display = 'flex';
 contentDiv.classList.add ('content-div')
 //contentDiv.style.flexDirection = 'column'
-//contentDiv.style.gap = '2rem';
+contentDiv.style.gap = '1rem';
 contentDiv.style.alignItems = 'center'
 
 // Button Div
@@ -246,9 +246,4 @@ copyImg.addEventListener('click', () => {
         copyImg.style.display = 'block'
     }, 1000)
 
-        /*setTimeout(
-            () => {
-                clearTimeout()
-            }
-        )*/
     })
